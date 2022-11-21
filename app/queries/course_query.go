@@ -2,18 +2,22 @@ package queries
 
 import (
 	"errors"
+	"go-fiber-demo/app/dto"
 	"go-fiber-demo/app/models"
 	"go-fiber-demo/pkg/database"
+	"go-fiber-demo/pkg/utils"
 )
 
-func GetCourses() ([]models.Course, error) {
-	var courses []models.Course
+func GetCourses() ([]dto.CourseAddDto, error) {
+	var res []models.Course
+	var courses []dto.CourseAddDto
 
-	err := database.DB.Table("tb_courses").Find(&courses).Error
+	err := database.DB.Table("tb_courses").Find(&res).Error
 	if err != nil {
-		return nil, errors.New("databse internal error")
+		return nil, errors.New("database internal error")
 	}
 
+	utils.Struct2StructByJson(res, &courses)
 	return courses, nil
 }
 
