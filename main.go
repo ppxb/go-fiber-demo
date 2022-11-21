@@ -16,5 +16,5 @@ func main() {
 
 	routes.PublicRoutes(app)
 
-	utils.StartServer(app)
+	utils.StartServerWithGracefulShutdown(app)
 }

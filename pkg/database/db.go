@@ -13,6 +13,8 @@ var (
 )
 
 func InitDb() {
+	// docker should change the host
+	// mysql:3306
 	dsn := "root:123456@tcp(127.0.0.1:3306)/demo?charset=utf8&collation=utf8mb4_general_ci&parseTime=True&loc=Local&timeout=10000ms"
 	mysqlConfig := mysql.Config{
 		DSN:                       dsn,

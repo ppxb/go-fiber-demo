@@ -1,0 +1,29 @@
+version: '3.7'
+
+networks:
+  course_net:
+    driver: bridge
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    volumes:
+      - ./deploy:/docker-entrypoint-initdb.d
+    networks:
+      - course_net
+
+  apiserver:
+    container_name: api
+    image: courseapi
+    ports:
+      - "8848:8848"
+    restart: always
+    command: ["/wait-for.sh","mysql:3306","--","/courseapi"]
+    networks:
+      - course_net

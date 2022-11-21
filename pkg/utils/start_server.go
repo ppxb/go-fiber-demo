@@ -22,7 +22,7 @@ func StartServerWithGracefulShutdown(a *fiber.App) {
 		close(idleConnsClosed)
 	}()
 
-	if err := a.Listen(":3333"); err != nil {
+	if err := a.Listen(":8848"); err != nil {
 		log.Printf("Oops... Server is not running! Reason: %v", err)
 	}
 
@@ -30,7 +30,7 @@ func StartServerWithGracefulShutdown(a *fiber.App) {
 }
 
 func StartServer(a *fiber.App) {
-	if err := a.Listen(":3333"); err != nil {
+	if err := a.Listen(":8848"); err != nil {
 		log.Printf("Oops... Server is not running! Reason: %v", err)
 	}
 }
